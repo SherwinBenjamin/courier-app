@@ -1,0 +1,6 @@
+express
+rabbitmq
+mongoose
+jwt
+joi
+dotenv
