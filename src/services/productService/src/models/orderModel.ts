@@ -67,7 +67,9 @@ const productSchema = new Schema<IProduct>({
     assignedTo: {type: Schema.Types.ObjectId, ref: "User", required: false},
 }, {timestamps: true});
 
-export {IProduct, productSchema, productTags, orderStatus}
+const Product = mongoose.model<IProduct>("Product", productSchema);
+
+export {IProduct, productSchema, productTags, orderStatus, Product}
 
 
 
