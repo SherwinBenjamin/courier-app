@@ -19,11 +19,16 @@ async function getProductById(productId: string): Promise<IProduct | null> {
 
 async function getProducts(): Promise<IProduct[]> {
 	try {
+
 		return await Product.find();
 	} catch (error: any) {
 		throw new Error(error.message);
 	}
 }
+
+
+
+
 
 async function updateProduct(
 	productId: string,
