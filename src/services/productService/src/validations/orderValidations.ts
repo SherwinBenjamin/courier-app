@@ -83,6 +83,9 @@ const createProductSchema = Joi.object({
 			"any.only":
 				"Product status must be one of [pending, assigned, delivered, cancelled]",
 		}),
+	
+	
+
 });
 
 export { createProductSchema };

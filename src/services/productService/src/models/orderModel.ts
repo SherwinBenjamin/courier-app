@@ -39,6 +39,8 @@ interface IProduct extends Document {
     productTags: productTags[];
     productStatus: orderStatus;
     assignedTo?: Schema.Types.ObjectId;
+    createdBy: Schema.Types.ObjectId;
+
 }
 
 const addressSchema = new Schema<Address>({
@@ -59,12 +61,14 @@ const productSchema = new Schema<IProduct>({
     name: {type: String, required: true},
     description: {type: String, required: true},
     price: {type: Number, required: true},
-    pickupLocation: { addressSchema, required: true},
-    deliveryLocation: { addressSchema, required: true},
-    itemDetails: { itemDetailsSchema, required: true},
+    pickupLocation: {type: addressSchema, required: true},
+    deliveryLocation: {type: addressSchema, required: true},
+    itemDetails: {type: itemDetailsSchema, required: true},
     productTags:[{type: String, enum: productTags}],
     productStatus : {type: String, enum: orderStatus, default: orderStatus.pending},
     assignedTo: {type: Schema.Types.ObjectId, ref: "User", required: false},
+    createdBy: {type: Schema.Types.ObjectId, ref: "User", required: true}
+
 }, {timestamps: true});
 
 const Product = mongoose.model<IProduct>("Product", productSchema);

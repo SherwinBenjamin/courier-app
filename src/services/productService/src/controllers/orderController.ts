@@ -5,7 +5,7 @@ import {IProduct} from '../models/orderModel';
 async function addProduct(req: Request, res: Response){
     const productData: IProduct = req.body;
     try{
-        const product = await createProduct(productData);
+        const product = await createProduct(productData, req);
         res.status(201).json(product);
     }catch(error: any){
         res.status(400).json({message: error.message});
@@ -14,19 +14,8 @@ async function addProduct(req: Request, res: Response){
 
 async function fetchProducts(req: Request, res: Response){
     try{
-        const products = await getProducts();
+        const products = await getProducts(req, res);
         res.status(200).json(products);
-    }catch(error: any){
-        res.status(400).json({message: error.message});
-    }
-}
-
-async function fetchProductById(req: Request, res: Response){
-    const productId = req.params.productId;
-    try{
-        const product = await getProductById(productId);
-        if(product) res.status(200).json(product);
-        else res.status(404).json({message: 'Product not found'});
     }catch(error: any){
         res.status(400).json({message: error.message});
     }
@@ -55,4 +44,4 @@ async function removeProduct(req: Request, res: Response){
     }
 }
 
-export {addProduct, fetchProducts, fetchProductById, modifyProduct, removeProduct};
+export {addProduct, fetchProducts, modifyProduct, removeProduct};
